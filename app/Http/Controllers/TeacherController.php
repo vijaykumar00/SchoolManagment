@@ -21,18 +21,21 @@ class TeacherController extends Controller
         return view('teacher.newAsg', compact('subject'));
     }
     public function store(Request $request)
-    {
+    {    $student=Student::all();
         $asgnment = new Assignment();
         $asgnment->asgname = $request->input('Asgname');
         $asgnment->description = $request->input('description');
         $asgnment->subject_id = $request->input('subject');
         $asgnment->class = $request->input('class');
         $asgnment->save();
-        return view('teacher.home')->with('created', 'asgnment created successfully');
+        return view('teacher.home',compact('student'));
     }
     public function showStudent()
     {
         $student = Student::all();
         return view('teacher.showStudent', compact('student'));
+    }
+    public function showsubmitedAsg(){
+        return view('teacher.showsubmitasg');
     }
 }

@@ -42,6 +42,7 @@ class RegisterController extends Controller
     }
     public function authenticate(Request $request)
     {
+        $student = Student::all();
         $users = DB::table('users')->get();
         $role = $request->role;
         if ($role == 2) {
@@ -50,25 +51,35 @@ class RegisterController extends Controller
                 'password' => $request['password'],
             ];
             if (Auth::attempt($credentials)) {
-                return view('teacher.home', compact('users'));
+                return view('teacher.home', compact('student'));
             }
         }
         return view('student.dashboard');
     }
     public function loginConfirem(Request $request)
     {
-        $user = Auth::user();
-        // if ($user->role_id == 1) 
-        //   {
-        $credentials = [
-            'email' => $request['email'],
-            'password' => $request['password'],
-        ];
-        if (Auth::attempt($credentials)) {
-            $student = Student::all();
+        // $user = Auth::user();
+        // if ($user->role_id == 1) {
+        //     $credentials = [
+        //         'email' => $request['email'],
+        //         'password' => $request['password'],
+        //     ];
+        //     if (Auth::attempt($credentials)) {
+        //         $student = Student::all();
+        //         return  view('teacher.home', compact('student'));
+        //     }
+        // }
+        // return view('student.dashboard');
+        $user=User::all();
+       foreach($user as $data){
+         if($data->role_id == 2 ){
+              $student=User::all();
             return  view('teacher.home', compact('student'));
-        }
-        //  }
-        return view('student.dashboard');
+         }else{
+             return view('student.dashboard');
+         }
+
+       }
+    
     }
 }

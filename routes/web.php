@@ -26,9 +26,11 @@ Route::get('/student.dashboard',[StudentController::class, 'index']);
 Route::get('/createAsg',[TeacherController::class,'createAsgnment']);
 Route::post('/createAsg',[TeacherController::class,'store']);
 Route::get('/show-student',[TeacherController::class,'showStudent']);
-Route::get('/show-Student',[StudentController::class,'showStudnt']);
+Route::get('/show-Student',[TeacherController::class,'showStudent']);
 Route::get('/Submitasg',[StudentController::class,'submitAsg']);
 Route::get('see-asg',[StudentController::class,'showAsg']);
 Route::get('add-student',[StudentController::class,'registerStudent']);
+Route::get('/submited-asg',[TeacherController::class,'showsubmitedAsg']);
+
 // Route::post('submit-Asg',[TeacherController::class,'submitAsg']);
 

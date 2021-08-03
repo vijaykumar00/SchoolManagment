@@ -25,16 +25,19 @@ class RegisterController extends Controller
             'password' => 'required',
             'role' => 'required'
         ]);
-        $user = new User();
-        $password = $request->input('password');
-        $hashed = Hash::make($password);
-        $user->firstName = $request->input('firstname');
-        $user->lastName = $request->input('lastname');
-        $user->password = $hashed;
-        $user->email = $request->input('email');
-        $user->role_id = $request->input('role');
-        $user->save();
-        return $this->authenticate($request);
+        if ($validated) {
+            $user = new User();
+            $password = $request->input('password');
+            $hashed = Hash::make($password);
+            $user->firstName = $request->input('firstname');
+            $user->lastName = $request->input('lastname');
+            $user->password = $hashed;
+            $user->email = $request->input('email');
+            $user->role_id = $request->input('role');
+            $user->save();
+            return $this->authenticate($request);
+        }
+        return redirect('/registeration.create');
     }
     public function login(Request $request)
     {
@@ -58,28 +61,22 @@ class RegisterController extends Controller
     }
     public function loginConfirem(Request $request)
     {
-        // $user = Auth::user();
-        // if ($user->role_id == 1) {
-        //     $credentials = [
-        //         'email' => $request['email'],
-        //         'password' => $request['password'],
-        //     ];
-        //     if (Auth::attempt($credentials)) {
-        //         $student = Student::all();
-        //         return  view('teacher.home', compact('student'));
-        //     }
-        // }
-        // return view('student.dashboard');
-        $user=User::all();
-       foreach($user as $data){
-         if($data->role_id == 2 ){
-              $student=User::all();
-            return  view('teacher.home', compact('student'));
-         }else{
-             return view('student.dashboard');
-         }
-
-       }
-    
+        $credentials = [
+            'email' => $request['email'],
+            'password' => $request['password'],
+        ];
+        // dd(Auth::user());
+        if (Auth::attempt($credentials)) {
+            if (Auth::user()->role_id == 1) {
+                $student = Student::all();
+                return  view('teacher.home', compact('student'));
+            }
+            return view('student.dashboard');
+        }
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 }

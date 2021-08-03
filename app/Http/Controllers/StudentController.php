@@ -22,19 +22,28 @@ class StudentController extends Controller
     }
     public function store(Request $request)
     {
-        $student = new Student;
-        $student->firstname = $request->input('firstname');
-        $student->lastname = $request->input('lastname');
-        $student->class = $request->input('class');
-        if ($request->hasfile('profile_image')) {
-            $file = $request->file('profile_image');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('uploads/students/', $filename);
-            $student->image = $filename;
+        $validate = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'class' => 'required',
+            'profile_image' => 'required'
+        ]);
+        if ($validate) {
+            $student = new Student;
+            $student->firstname = $request->input('firstname');
+            $student->lastname = $request->input('lastname');
+            $student->class = $request->input('class');
+            if ($request->hasfile('profile_image')) {
+                $file = $request->file('profile_image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extention;
+                $file->move('uploads/students/', $filename);
+                $student->image = $filename;
+            }
+            $student->save();
+            return redirect('/student.dashboard');
         }
-        $student->save();
-        return redirect('/student.dashboard');
+        return redirect('/student.create')->with('message', 'Information are Incorrect');
     }
     public function showAsg()
     {
@@ -43,13 +52,12 @@ class StudentController extends Controller
     }
     public function submitAsg(Request $request)
     {
-        $asgnment = new asgnmentsub();
-        // $asgnment->document = $request->document;
-        return view('student.submitAsg');
+        $asgnment = Assignment::all();
+        return view('student.submitAsg', compact('asgnment'));
     }
-    public function showStudnt(){
+    public function showStudnt()
+    {
         $student = Student::all();
-        return view('student.showClass',compact('student'));
-
+        return view('student.showClass', compact('student'));
     }
 }

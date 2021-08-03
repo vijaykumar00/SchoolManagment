@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
-{
+{   
     use HasFactory;
-    protected $table = "assignments";
-    public function subject()
-    {
-        return $this->hasOne(Subject::class, 'id');
+    public function subject(){
+       return $this->hasOne('App\Model\Subject');
+    }
+    public function teacher(){
+        return $this->hasOne('App\Model\Teacher');
     }
 }

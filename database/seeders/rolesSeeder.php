@@ -14,7 +14,7 @@ class rolesSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
         DB::table('roles')->insert([
             [
                 'name' => 'student'

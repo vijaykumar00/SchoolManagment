@@ -1,11 +1,12 @@
-@extends('sidebar1');
-<section class="page-content">
+@extends('sidebar1')
+<section class="page-content" style="margin-top: 0px;padding-top: 0px;">
     <section class="search-and-user">
         <div class="Student-profile">
             <h2 style="font-family: sans-serif;">Student</h2>
         </div>
     </section>
 </section>
+
 <script>
     const html = document.documentElement;
     const body = document.body;
@@ -28,7 +29,6 @@
             this.setAttribute("aria-label", "expand menu") :
             this.setAttribute("aria-label", "collapse menu");
     });
-
     /*TOGGLE MOBILE MENU*/
     toggleMobileMenu.addEventListener("click", function() {
         body.classList.toggle("mob-menu-opened");

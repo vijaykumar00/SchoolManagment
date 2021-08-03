@@ -61,6 +61,16 @@ class RegisterController extends Controller
     }
     public function loginConfirem(Request $request)
     {
+        $validate = $request->validate(
+            [
+                'email' => 'required',
+                'password' => 'required'
+            ],
+            [
+                'name.requird' => 'email is incorrect',
+                'password.required' => 'Fill the Correct Password'
+            ]
+        );
         $credentials = [
             'email' => $request['email'],
             'password' => $request['password'],

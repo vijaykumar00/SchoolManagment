@@ -18,13 +18,13 @@ class StudentController extends Controller
     }
     public function registerStudent()
     {
-        return view('student.create');
+        return view('create');
     }
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|min:6',
+            'lastname' => 'required|min:6',
             'class' => 'required',
             'profile_image' => 'required'
         ]);

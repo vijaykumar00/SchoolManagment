@@ -24,7 +24,7 @@ class Validated extends FormRequest
     public function rules()
     {
         return [
-            
+         
         ];
     }
 }

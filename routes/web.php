@@ -16,9 +16,15 @@ use App\Models\Student;
 |
 */
 //Registration
-Route::get('/', [RegisterController::class, 'create']);
+Route::get('/',function(){
+return view('home');
+});
+// Route::get('/create', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store'])->name('home');
 Route::get('/login', [RegisterController::class, 'login']);
+Route::get('/home',function(){
+    return view('/home');
+});
 Route::post('/home', [RegisterController::class, 'loginConfirem']);
 Route::post('logout', [RegisterController::class, 'logout'])->name('logout');
 

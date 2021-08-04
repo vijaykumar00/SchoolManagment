@@ -75,13 +75,12 @@ class RegisterController extends Controller
             'email' => $request['email'],
             'password' => $request['password'],
         ];
-        // dd(Auth::user());
         if (Auth::attempt($credentials)) {
             if (Auth::user()->role_id == 1) {
-                $student = Student::all();
-                return  view('teacher.home', compact('student'));
+                return  view('student.dashboard');
             }
-            return view('student.dashboard');
+            $student = Student::all();
+            return view('teacher.home', compact('student'));
         }
     }
     public function logout(Request $request)

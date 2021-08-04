@@ -14,14 +14,16 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" name="email" id="form3Example3c" class="form-control" required />
+                      <input type="email" name="email" id="form3Example3c" class="form-control" />
+                      @if($errors->has('email'))<p style="color: red;">{{$errors->first('email')}}</p>@endif
                       <label class="form-label" for="form3Example3c">Your Email</label>
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" name="password" class="form-control" required />
+                      <input type="password" id="form3Example4c" name="password" class="form-control" />
+                      @if($errors->has('password'))<p style="color:red;">{{$errors->first('password')}}</p>@endif
                       <label class="form-label" for="form3Example4c">Password</label>
                     </div>
                   </div>
@@ -32,9 +34,9 @@
                   </div>
                   <div class="form-check d-flex justify-content-center mb-5">
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" class="btn btn-primary btn-lg">Log In</button>            
-                  </div>
-                     <a href="/home">Back To Home</a>   
+                      <button type="submit" class="btn btn-primary btn-lg">Log In</button>
+                    </div>
+                    <a href="/home">Back To Home</a>
                 </form>
               </div>
             </div>
@@ -45,7 +47,7 @@
   </div>
 </section>
 <style>
-  body{
+  body {
     background-color: black;
   }
 </style>

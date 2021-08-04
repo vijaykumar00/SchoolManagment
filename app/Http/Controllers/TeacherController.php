@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use App\Models\asgnmentsub;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -51,7 +52,30 @@ class TeacherController extends Controller
     }
     public function submitAsg(Request $request)
     {
-        return view('student.dashboard')->with('successMsg', 'Asgnment submited successfully');
+        $student_id = Auth::user()->id;
+        $validate = $request->validate(
+            [
+                'Asgname' => 'required',
+                // 'subject' => 'required',
+                // 'class' => 'required',
+                'document' => 'required'
+            ],
+            [
+                'Asgname.required' => 'Select the name of the asgnments',
+                // 'subject.required' => 'Select name of the subject',
+                // 'class.required' => 'select the class',
+                'document.required' => 'upload file'
+            ]
+        );
+        if ($validate) {
+            // $asg_id = DB::table('assignments')->select('id')->get();
+            $submission = new asgnmentsub();
+            // $submission->asg_id = $request->Asgname;
+            // $submission->student_id = $student_id;
+            $submission->document = $request->document;
+            $submission->save();
+            return redirect('/see-asg');
+        }
     }
     public function editAsg()
     {
@@ -78,11 +102,12 @@ class TeacherController extends Controller
                 'class' => $class
             ]);
         if ($update) {
-         return redirect('editAsg');
+            return redirect('editAsg');
         }
     }
-    public function destroy($id){
-        DB::delete('delete from assignments where id =?',[$id]);
-        return redirect('editAsg')  ;
+    public function destroy($id)
+    {
+        DB::delete('delete from assignments where id =?', [$id]);
+        return redirect('editAsg');
     }
 }

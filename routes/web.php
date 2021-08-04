@@ -16,13 +16,13 @@ use App\Models\Student;
 |
 */
 //Registration
-Route::get('/',function(){
-return view('home');
+Route::get('/', function () {
+    return view('home');
 });
-// Route::get('/create', [RegisterController::class, 'create']);
+Route::get('/create', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store'])->name('home');
 Route::get('/login', [RegisterController::class, 'login']);
-Route::get('/home',function(){
+Route::get('/home', function () {
     return view('/home');
 });
 Route::post('/home', [RegisterController::class, 'loginConfirem']);
@@ -43,12 +43,8 @@ Route::get('/submited-asg', [TeacherController::class, 'showsubmitedAsg']);
 Route::get('/createAsg', [TeacherController::class, 'createAsgnment']);
 Route::post('/createAsg', [TeacherController::class, 'store']);
 Route::get('/show-student', [TeacherController::class, 'showStudent']);
-Route::post('/Submit-asg',[TeacherController::class,'submitAsg']);
-Route::get('editAsg',[TeacherController::class,'editAsg'])->name('editasg');
-Route::get('edit/{id}',[TeacherController::class,'edit']);
-Route::post('/updateAsg/{id}',[TeacherController::class,'updateAsg'])->name('update');
-Route::get('/delete/{id}',[TeacherController::class,'destroy'])->name('delete');
-
-
-
-
+Route::post('/Submit-asg', [TeacherController::class, 'submitAsg']);
+Route::get('editAsg', [TeacherController::class, 'editAsg'])->name('editasg');
+Route::get('edit/{id}', [TeacherController::class, 'edit']);
+Route::post('/updateAsg/{id}', [TeacherController::class, 'updateAsg'])->name('update');
+Route::get('/delete/{id}', [TeacherController::class, 'destroy'])->name('delete');

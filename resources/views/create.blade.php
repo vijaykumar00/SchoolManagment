@@ -3,10 +3,11 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 <script src="{{ asset('js/custem.js') }}"></script>
 <style>
-    body{
+    body {
         background-color: black;
     }
-    .card{
+
+    .card {
         background-color: black;
         color: white;
     }

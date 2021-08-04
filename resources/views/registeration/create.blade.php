@@ -1,13 +1,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 @if($errors->any())
-<div class="alert alert-danger">
-  <ul>
-    @foreach($errors->all() as $error)
-    <li>{{$error}}</li>
-    @endforeach
-  </ul>
-</div>
+
+
 @endif
 <section class="vh-100" style="background-color: black;">
   <div class="container h-100" style="background-color: black;">
@@ -24,6 +19,7 @@
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input type="text" name="firstname" id="form3Example1c" class="form-control" />
+                      @if ($errors->has('firstname')) <p style="color:red;">{{ $errors->first('firstname') }}</p> @endif
                       <label class="form-label" for="form3Example1c">First Name</label>
                     </div>
                   </div>
@@ -31,6 +27,7 @@
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input type="text" id="form3Example1c" name="lastname" class="form-control" />
+                       @if ($errors->has('lastname')) <p style="color:red;">{{ $errors->first('lastname') }}</p> @endif
                       <label class="form-label" for="form3Example1c">Last Name</label>
                     </div>
                   </div>
@@ -38,6 +35,7 @@
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <select class="select form-control" name="role" aria-label=".form-select-lg example">
+                          @if ($errors->has('role')) <p style="color:red;">{{ $errors->first('role') }}</p> @endif
                         <option selected>Role</option>
                         <option value="1">Student</option>
                         <option value="2">Teacher</option>
@@ -49,6 +47,7 @@
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input type="email" name="email" id="form3Example3c" class="form-control" />
+                          @if ($errors->has('email')) <p style="color:red;">{{ $errors->first('email') }}</p> @endif
                       <label class="form-label" for="form3Example3c">Your Email</label>
                     </div>
                   </div>
@@ -56,6 +55,7 @@
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input type="password" id="form3Example4c" name="password" class="form-control" />
+                        @if ($errors->has('password')) <p style="color:red;">{{ $errors->first('password') }}</p>@endif
                       <label class="form-label" for="form3Example4c">Password</label>
                     </div>
                   </div>

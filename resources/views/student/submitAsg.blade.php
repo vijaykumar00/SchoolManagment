@@ -1,4 +1,6 @@
 @extends('sidebar1')
+@foreach($asgnment as $asg)
+@endforeach
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -7,30 +9,33 @@
                     <h4 style="color: brown;"> Upload Asginment</h4>
                 </div>
                 <div class="card-body">
-                    <form action="Submit-asg" method="POST" enctype="multipart/form-data">
+                    <form action="/Submit-asg" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group mb-3">
                             <label for="">Asgnment Name</label>
-                            <input type="text" name="asgname" class="form-control" value="1" required>
+                            <select class="select form-control" name="Asgname" aria-label=".form-select-lg example">
+                                <option selected>Name</option>
+                                @foreach($asgnment as $asg)
+                                <option value="{{$asg->id}}">{{$asg->asgname}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Subject</label>
                             <select class="select form-control" name="subject" aria-label=".form-select-lg example">
                                 <option selected>Subject</option>
-                                <option value="1">Math</option>
-                                <option value="2">Science</option>
-                                <option value="3">Computer</option>
-                                <option value="4">Art</option>
+                                @foreach($asgnment as $asg)
+                                <option value="{{$asg->subject}}">{{$asg->subject}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Class</label>
                             <select class="select form-control" name="class" aria-label=".form-select-lg example">
                                 <option selected>Class</option>
-                                <option value="1">9</option>
-                                <option value="2">10</option>
-                                <option value="3">+1</option>
-                                <option value="4">+2</option>
+                                @foreach($asgnment as $asg)
+                                <option value="{{$asg->class}}">{{$asg->class}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group mb-3">

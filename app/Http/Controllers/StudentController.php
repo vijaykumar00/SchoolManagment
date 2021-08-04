@@ -47,17 +47,24 @@ class StudentController extends Controller
     }
     public function showAsg()
     {
-        $asgnment = Assignment::all();
+        $asgnment = DB::table('assignments')
+            ->join('subjects', 'subjects.id', '=', 'assignments.subject_id')
+            ->join('teachers', 'teachers.id', '=', 'assignments.teachr_id')->get();
         return view('student.showAsgnment', compact('asgnment'));
     }
     public function submitAsg(Request $request)
     {
-        $asgnment = Assignment::all();
+        // $asgnment = Assignment::all();
+        // return view('student.submitAsg', compact('asgnment'));
+        $asgnment = DB::table('assignments')
+            ->join('subjects', 'subjects.id', '=', 'assignments.subject_id')
+            ->join('teachers', 'teachers.id', '=', 'assignments.teachr_id')->get();
         return view('student.submitAsg', compact('asgnment'));
     }
     public function showStudnt()
     {
         $student = Student::all();
+
         return view('student.showClass', compact('student'));
     }
 }

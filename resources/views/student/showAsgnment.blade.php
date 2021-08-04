@@ -1,7 +1,6 @@
-
 @extends('sidebar1')
 <div class="container">
-    <table class="table table-dark table-striped" style="margin-left: 150px; margin-top: 18px; margin-right:18px;">
+    <table class="table table-dark table-striped" style="margin-left: 150px; margin-top: 18px; margin-right:18px; width:-webkit-fill-available">
         <thead>
             <tr>
                 <th>Name</th>
@@ -15,11 +14,10 @@
             @foreach($asgnment as $asg)
             <tr>
                 <td>{{$asg->asgname}}</td>
-                <td>{{$asg->teacher_id}}</td>
-                <td>{{$asg->subject_id}}</td>
+                <td>{{$asg->name}}</td>
+                <td>{{$asg->subject}}</td>
                 <td>{{$asg->description}}</td>
                 <td>{{$asg->class}}</td>
-
             </tr>
             @endforeach
         </tbody>

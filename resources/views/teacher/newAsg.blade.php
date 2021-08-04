@@ -26,7 +26,7 @@
                                 <option value="1">Math</option>
                                 <option value="2">Science</option>
                                 <option value="3">Computer</option>
-                                <option value="4">Art</option>  
+                                <option value="4">Art</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">
@@ -40,12 +40,12 @@
                             </select>
                         </div>
                         <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">New Assignment</button>
+                            <button type="submit" class="btn btn-primary">Add Assignment</button>
                         </div>
                     </form>
-                       <div class="form-group mb-3">
-                            <a href="editAsg"><button class="btn btn-success">Edit Assignment</button></a>
-                        </div>
+                    <div class="form-group mb-3">
+                        <a href="editAsg"><button class="btn btn-success">Edit Assignment</button></a>
+                    </div>
                 </div>
             </div>
         </div>

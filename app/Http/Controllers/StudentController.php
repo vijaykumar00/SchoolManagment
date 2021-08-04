@@ -50,6 +50,9 @@ class StudentController extends Controller
         $asgnment = DB::table('assignments')
             ->join('subjects', 'subjects.id', '=', 'assignments.subject_id')
             ->join('teachers', 'teachers.id', '=', 'assignments.teachr_id')->get();
+        // ->whereDate('created_at', '=', date('Y-m-d'))->get();
+        // dd($asgnment);
+
         return view('student.showAsgnment', compact('asgnment'));
     }
     public function submitAsg(Request $request)

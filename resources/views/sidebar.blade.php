@@ -35,7 +35,7 @@
                     <svg>
                         <use xlink:href="#comments"></use>
                     </svg>
-                    <span> See Assignment</span>
+                    <span>See Assignment</span>
                 </a>
             </li>
             <li class="menu-heading">

@@ -47,8 +47,10 @@ class TeacherController extends Controller
     }
     public function showsubmitedAsg()
     {
-        // $asg=asgnmentsub::all();
-        return view('teacher.showsubmitasg');
+        $submitedAsg = DB::table('asgnmentsubs')
+            ->join('assignments', 'assignments.id', '=', 'asgnmentsubs.asg_id')
+            ->join('students', 'students.id', '=', 'asgnmentsubs.student_id')->get();
+        return view('teacher.showsubmitasg', compact('submitedAsg'));
     }
     public function submitAsg(Request $request)
     {
@@ -70,7 +72,7 @@ class TeacherController extends Controller
         if ($validate) {
             // $asg_id = DB::table('assignments')->select('id')->get();
             $submission = new asgnmentsub();
-            // $submission->asg_id = $request->Asgname;
+            $submission->asg_id = $request->Asgname;
             // $submission->student_id = $student_id;
             $submission->document = $request->document;
             $submission->save();

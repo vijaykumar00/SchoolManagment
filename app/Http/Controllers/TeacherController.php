@@ -60,21 +60,19 @@ class TeacherController extends Controller
                 'Asgname' => 'required',
                 // 'subject' => 'required',
                 // 'class' => 'required',
-                'document' => 'required'
-            ],
-            [
-                'Asgname.required' => 'Select the name of the asgnments',
-                // 'subject.required' => 'Select name of the subject',
-                // 'class.required' => 'select the class',
-                'document.required' => 'upload file'
             ]
         );
         if ($validate) {
-            // $asg_id = DB::table('assignments')->select('id')->get();
             $submission = new asgnmentsub();
             $submission->asg_id = $request->Asgname;
-            // $submission->student_id = $student_id;
             $submission->document = $request->document;
+            if ($request->hasFile('document')) {
+                $file = $request->file('document');
+                $extension = $file->getClientOriginalExtension('document');
+                $filename = time() . '.' . $extension;
+                $file->move('uploads/Asgnments/', $filename);
+                $submission->document = $filename;
+            }
             $submission->save();
             return redirect('/see-asg');
         }

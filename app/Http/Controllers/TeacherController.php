@@ -60,7 +60,8 @@ class TeacherController extends Controller
                 'Asgname' => 'required',
                 // 'subject' => 'required',
                 // 'class' => 'required',
-            ]
+                'document' => 'required|mimes:doc,pdf'
+            ],
         );
         if ($validate) {
             $submission = new asgnmentsub();

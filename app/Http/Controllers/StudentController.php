@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Assignment;
 use App\Models\asgnmentsub;
 use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -33,6 +34,7 @@ class StudentController extends Controller
             $student->firstname = $request->input('firstname');
             $student->lastname = $request->input('lastname');
             $student->class = $request->input('class');
+            $student->user_id = Auth::user()->id;
             if ($request->hasfile('profile_image')) {
                 $file = $request->file('profile_image');
                 $extention = $file->getClientOriginalExtension();

@@ -51,3 +51,4 @@ Route::get('edit/{id}', [TeacherController::class, 'edit']);
 Route::post('/updateAsg/{id}', [TeacherController::class, 'updateAsg'])->name('update');
 Route::get('/delete/{id}', [TeacherController::class, 'destroy'])->name('delete');
 Route::get('/grade/{id}', [TeacherController::class, 'giveGrade']);
+Route::post('/gradeiven/{id}', [TeacherController::class, 'gradegiven']);

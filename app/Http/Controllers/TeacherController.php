@@ -55,29 +55,30 @@ class TeacherController extends Controller
     }
     public function submitAsg(Request $request)
     {
-        $student_id = Auth::user()->id;
-        $validate = $request->validate(
-            [
-                'Asgname' => 'required',
-                // 'subject' => 'required',
-                // 'class' => 'required',
-                'document' => 'required|mimes:doc,pdf'
-            ],
-        );
-        if ($validate) {
-            $submission = new asgnmentsub();
-            $submission->asg_id = $request->Asgname;
-            $submission->document = $request->document;
-            if ($request->hasFile('document')) {
-                $file = $request->file('document');
-                $extension = $file->getClientOriginalExtension('document');
-                $filename = time() . '.' . $extension;
-                $file->move('uploads/Asgnments/', $filename);
-                $submission->document = $filename;
-            }
-            $submission->save();
-            return redirect('/see-asg');
+        // $student_id = Auth::user()->id;
+        // $validate = $request->validate(
+        //     [
+        //         'Asgname' => 'required',
+        //         // 'subject' => 'required',
+        //         // 'class' => 'required',
+        //         'document' => 'required|mimes:doc,pdf'
+        //     ],
+        // );
+        // if ($validate) {
+        $submission = new asgnmentsub();
+        $submission->asg_id = $request->Asgname;
+        // dd($request->Asgname);
+        $submission->document = $request->document;
+        if ($request->hasFile('document')) {
+            $file = $request->file('document');
+            $extension = $file->getClientOriginalExtension('document');
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/Asgnments/', $filename);
+            $submission->document = $filename;
         }
+        $submission->save();
+        return redirect('/see-asg');
+        // }
     }
     public function editAsg()
     {
@@ -125,11 +126,25 @@ class TeacherController extends Controller
     }
     public function giveGrade(Request $request, $id)
     {
-        // $submitedAsg = $id;
-        $submitedAsg = DB::table('asgnmentsubs')->where('id', $id)
-            ->join('assignments', 'assignments.id', '=', 'asgnmentsubs.asg_id')
-            ->join('students', 'students.id', '=', 'asgnmentsubs.student_id')->get();
-        dd($submitedAsg);
+        // dd($id);
+        $submitedAsg = DB::table('asgnmentsubs')->where('id', $id)->get();
+        // dd(($submitedAsg);
+        // ->join('assignments', 'assignments.id', '=', 'asgnmentsubs.asg_id')
+        // ->join('students', 'students.id', '=', 'asgnmentsubs.student_id')->get();
+        // dd($submitedAsg);
         return view('teacher.showgrade', compact('submitedAsg'));
+    }
+    public function gradegiven(Request $request, $id)
+    {
+        $givengrade = $request->input('grade');
+        // dd($givengrade);
+        $grade = DB::table('asgnmentsubs')
+            ->where('id', $id)->update([
+                'grades' => $givengrade
+            ]);
+        // ->update([
+        //     'grades' => $givengrade
+        // ]);
+        return redirect('/submited-asg')->with('success', 'grade is given');
     }
 }

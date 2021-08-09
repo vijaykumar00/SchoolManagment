@@ -8,6 +8,7 @@
             <th>class</th>
             <th>Pdf</th>
             <th>Grade</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +18,7 @@
             <td>{{$submit->firstname ." ".$submit->lastname}}</td>
             <td>{{$submit->class}}</td>
             <td>{{$submit->document}}</td>
+            <td>{{$submit->grades}}</td>
             <td><a href="/grade/{{$submit->id}}"><button class="btn btn-success">Give Grade</button></a></td>
         </tr>
         @endforeach

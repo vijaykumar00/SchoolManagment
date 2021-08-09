@@ -127,12 +127,8 @@ class TeacherController extends Controller
     public function giveGrade(Request $request, $id)
     {
         // dd($id);
-        $submitedAsg = DB::table('asgnmentsubs')->where('id', $id)->get();
-        // dd(($submitedAsg);
-        // ->join('assignments', 'assignments.id', '=', 'asgnmentsubs.asg_id')
-        // ->join('students', 'students.id', '=', 'asgnmentsubs.student_id')->get();
-        // dd($submitedAsg);
-        return view('teacher.showgrade', compact('submitedAsg'));
+
+        return view('teacher.showgrade', compact('id'));
     }
     public function gradegiven(Request $request, $id)
     {

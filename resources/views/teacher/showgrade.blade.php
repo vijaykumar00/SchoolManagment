@@ -1,8 +1,8 @@
 @extends('layoutes.header')
 @extends('layoutes.sidebar')
 
-@foreach($submitedAsg as $Asg)
-<form action="/gradeiven/{{$Asg->id}}" method="POST">
+
+<form action="/gradeiven/{{$id}}" method="POST">
     @csrf
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="grade" style="margin-left: 300px;margin-top:10px;width:500px">
         <option selected>Give Grade</option>
@@ -19,4 +19,3 @@
     </select>
     <button class="btn btn-success" type="submit" style="margin-left: 300px;">Submit</button>
 </form>
-@endforeach

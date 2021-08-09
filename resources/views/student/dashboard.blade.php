@@ -1,4 +1,5 @@
-@extends('sidebar1')
+@extends('layoutes.header')
+@extends('layoutes.sidebar1')
 <section class="page-content" style="margin-top: 0px;padding-top: 0px;">
     <section class="search-and-user">
         <div class="Student-profile">
@@ -6,7 +7,6 @@
         </div>
     </section>
 </section>
-
 <script>
     const html = document.documentElement;
     const body = document.body;

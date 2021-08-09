@@ -8,6 +8,7 @@ use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use App\Models\asgnmentsub;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Driver\Selector;
 
 class TeacherController extends Controller
 {
@@ -29,7 +30,7 @@ class TeacherController extends Controller
             'class' => 'required'
         ]);
         if ($validate) {
-            $student = Student::all();
+            // $student = Student::all();
             $asgnment = new Assignment();
             $asgnment->asgname = $request->input('Asgname');
             $asgnment->description = $request->input('description');
@@ -90,6 +91,17 @@ class TeacherController extends Controller
     }
     public function updateAsg(Request $request, $id)
     {
+        $validate = $request->validate([
+            'Asgname' => 'required',
+            'description' => 'required',
+            'subject' => 'required',
+            'class' => 'required'
+        ], [
+            'Asgname.required' => 'enter asgnament name',
+            'description.required' => 'enter description',
+            'subject.required' => 'select the subject',
+            'class.required' => 'select the class'
+        ]);
         $asgname = $request->input('Asgname');
         $description = $request->input('description');
         $subject = $request->input('subject');
@@ -110,5 +122,14 @@ class TeacherController extends Controller
     {
         DB::delete('delete from assignments where id =?', [$id]);
         return redirect('editAsg');
+    }
+    public function giveGrade(Request $request, $id)
+    {
+        // $submitedAsg = $id;
+        $submitedAsg = DB::table('asgnmentsubs')->where('id', $id)
+            ->join('assignments', 'assignments.id', '=', 'asgnmentsubs.asg_id')
+            ->join('students', 'students.id', '=', 'asgnmentsubs.student_id')->get();
+        dd($submitedAsg);
+        return view('teacher.showgrade', compact('submitedAsg'));
     }
 }

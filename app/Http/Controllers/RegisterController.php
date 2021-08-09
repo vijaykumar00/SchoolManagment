@@ -77,7 +77,9 @@ class RegisterController extends Controller
         ];
         if (Auth::attempt($credentials)) {
             if (Auth::user()->role_id == 1) {
-                return  view('student.dashboard');
+                $firstname = Auth::user()->firstName;
+                $lastname = Auth::user()->lastName;
+                return  view('student.dashboard', ['firstname' => $firstname], ['lastname' => $lastname]);
             }
             $student = Student::all();
             return view('teacher.home', compact('student'));

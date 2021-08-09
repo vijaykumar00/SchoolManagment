@@ -1,4 +1,5 @@
-@extends('sidebar');
+@extends('layoutes.header')
+@extends('layoutes.sidebar')
 <section class="page-content">
     <section class="search-and-user">
         <h3 style="font-family: sans-serif;">Teacher</h3>

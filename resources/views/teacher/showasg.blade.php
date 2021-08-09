@@ -1,4 +1,5 @@
-@extends('sidebar')
+@extends('layoutes.header')
+@extends('layoutes.sidebar')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -16,11 +17,11 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Description</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" ></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="description"></textarea>
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Subject</label>
-                            <select class="select form-control" name="subject"  aria-label=".form-select-lg example">
+                            <select class="select form-control" name="subject" aria-label=".form-select-lg example">
                                 <option>Subject</option>
                                 <option value="1">Math</option>
                                 <option value="2">Science</option>
@@ -30,7 +31,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Class</label>
-                            <select class="select form-control" name="class"  aria-label=".form-select-lg example">
+                            <select class="select form-control" name="class" aria-label=".form-select-lg example">
                                 <option>Class</option>
                                 <option value="1">9</option>
                                 <option value="2">10</option>

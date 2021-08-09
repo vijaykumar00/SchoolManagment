@@ -15,10 +15,12 @@ use App\Models\Student;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Registration
+
 Route::get('/', function () {
     return view('home');
 });
+
+//Registration
 Route::get('/create', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store'])->name('home');
 Route::get('/login', [RegisterController::class, 'login']);
@@ -35,7 +37,7 @@ Route::get('/student.dashboard', [StudentController::class, 'index']);
 Route::get('/show-Student', [StudentController::class, 'showStudnt']);
 Route::get('/Submitasg', [StudentController::class, 'submitAsg']);
 Route::get('see-asg', [StudentController::class, 'showAsg']);
-Route::get('add-student', [StudentController::class, 'registerStudent']);
+Route::get('/add-Student', [StudentController::class, 'registerStudent']);
 
 
 //Teacher Controller
@@ -48,3 +50,4 @@ Route::get('editAsg', [TeacherController::class, 'editAsg'])->name('editasg');
 Route::get('edit/{id}', [TeacherController::class, 'edit']);
 Route::post('/updateAsg/{id}', [TeacherController::class, 'updateAsg'])->name('update');
 Route::get('/delete/{id}', [TeacherController::class, 'destroy'])->name('delete');
+Route::get('/grade/{id}', [TeacherController::class, 'giveGrade']);

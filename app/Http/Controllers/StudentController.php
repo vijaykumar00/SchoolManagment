@@ -28,13 +28,18 @@ class StudentController extends Controller
             'lastname' => 'required|min:6',
             'class' => 'required',
             'profile_image' => 'required'
+        ], [
+            'firstname.required' => 'Enter Your first Name',
+            'lastname.required' => 'enter your lastname',
+            'class.required' => 'enter your class',
+            'profile_image.required' => 'upload your image'
         ]);
         if ($validate) {
             $student = new Student;
             $student->firstname = $request->input('firstname');
             $student->lastname = $request->input('lastname');
             $student->class = $request->input('class');
-            $student->user_id = Auth::user()->id;
+            // $student->user_id = Auth::user()->id;
             if ($request->hasfile('profile_image')) {
                 $file = $request->file('profile_image');
                 $extention = $file->getClientOriginalExtension();
@@ -43,9 +48,9 @@ class StudentController extends Controller
                 $student->image = $filename;
             }
             $student->save();
-            return redirect('/student.dashboard');
+            return view('/student.dashboard');
         }
-        return redirect('/student.create')->with('message', 'Information are Incorrect');
+        return redirect('/student.create');
     }
     public function showAsg()
     {
@@ -54,7 +59,6 @@ class StudentController extends Controller
             ->join('teachers', 'teachers.id', '=', 'assignments.teachr_id')->get();
         // ->whereDate('created_at', '=', date('Y-m-d'))->get();
         // dd($asgnment);
-
         return view('student.showAsgnment', compact('asgnment'));
     }
     public function submitAsg(Request $request)

@@ -25,18 +25,22 @@
                         <div class="form-group mb-3">
                             <label for="">Student FirstName</label>
                             <input type="text" name="firstname" class="form-control">
+                            @if ($errors->has('firstname')) <p style="color:red;">{{ $errors->first('firstname') }}</p> @endif
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Student LastName</label>
                             <input type="text" name="lastname" class="form-control">
+                            @if ($errors->has('lastname')) <p style="color:red;">{{ $errors->first('lastname') }}</p> @endif
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Student Class</label>
                             <input type="text" name="class" class="form-control">
+                            @if ($errors->has('class')) <p style="color:red;">{{ $errors->first('class') }}</p> @endif
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Student Profile Image</label>
                             <input type="file" name="profile_image" class="form-control">
+                            @if ($errors->has('profile_image')) <p style="color:red;">{{ $errors->first('profile_image') }}</p> @endif
                         </div>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-primary">Register Student</button>

@@ -1,4 +1,5 @@
-@extends('sidebar1')
+@extends('layoutes.header')
+@extends('layoutes.sidebar1')
 @foreach($asgnment as $asg)
 @endforeach
 <div class="container">

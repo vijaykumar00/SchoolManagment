@@ -1,4 +1,5 @@
-@extends('sidebar1')
+@extends('layoutes.header')
+@extends('layoutes.sidebar1')
 <div class="container">
     <table class="table table-dark table-striped" style="margin-left: 150px; margin-top: 18px; margin-right:18px; width:-webkit-fill-available">
         <thead>

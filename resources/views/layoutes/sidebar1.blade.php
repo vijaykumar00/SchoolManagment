@@ -16,6 +16,11 @@
                 </a>
             </li>
             <li>
+                <a href="/submitd-asg">
+                    <span> Submited Assignment</span>
+                </a>
+            </li>
+            <li>
                 <a href="/Submitasg">
                     <span>Upload Assignment</span>
                 </a>

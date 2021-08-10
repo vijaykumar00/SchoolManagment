@@ -34,10 +34,20 @@ class RegisterController extends Controller
             $user->password = $hashed;
             $user->email = $request->input('email');
             $user->role_id = $request->input('role');
-            $user->save();
+            if ($user->save()) {
+                if ($user->role_id == 1) {
+                    $this->createStudent($user->id,);
+                }
+            }
             return $this->authenticate($request);
         }
         return redirect('/registeration.create');
+    }
+    public function createStudent()
+    {
+    }
+    public function createTeacher()
+    {
     }
     public function login(Request $request)
     {

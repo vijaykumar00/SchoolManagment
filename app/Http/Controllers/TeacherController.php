@@ -53,33 +53,7 @@ class TeacherController extends Controller
             ->join('students', 'students.id', '=', 'asgnmentsubs.student_id')->get();
         return view('teacher.showsubmitasg', compact('submitedAsg'));
     }
-    public function submitAsg(Request $request)
-    {
-        // $student_id = Auth::user()->id;
-        // $validate = $request->validate(
-        //     [
-        //         'Asgname' => 'required',
-        //         // 'subject' => 'required',
-        //         // 'class' => 'required',
-        //         'document' => 'required|mimes:doc,pdf'
-        //     ],
-        // );
-        // if ($validate) {
-        $submission = new asgnmentsub();
-        $submission->asg_id = $request->Asgname;
-        // dd($request->Asgname);
-        $submission->document = $request->document;
-        if ($request->hasFile('document')) {
-            $file = $request->file('document');
-            $extension = $file->getClientOriginalExtension('document');
-            $filename = time() . '.' . $extension;
-            $file->move('uploads/Asgnments/', $filename);
-            $submission->document = $filename;
-        }
-        $submission->save();
-        return redirect('/see-asg');
-        // }
-    }
+
     public function editAsg()
     {
         $asgnment = DB::table('assignments')->get();

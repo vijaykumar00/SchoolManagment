@@ -38,6 +38,11 @@
                             @if ($errors->has('class')) <p style="color:red;">{{ $errors->first('class') }}</p> @endif
                         </div>
                         <div class="form-group mb-3">
+                            <label for="">Email</label>
+                            <input type="email" name="email" class="form-control">
+                            @if ($errors->has('class')) <p style="color:red;">{{ $errors->first('class') }}</p> @endif
+                        </div>
+                        <div class="form-group mb-3">
                             <label for="">Student Profile Image</label>
                             <input type="file" name="profile_image" class="form-control">
                             @if ($errors->has('profile_image')) <p style="color:red;">{{ $errors->first('profile_image') }}</p> @endif

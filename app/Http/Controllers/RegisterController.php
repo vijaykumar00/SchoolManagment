@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
+use App\Models\Teacher;
 
 class RegisterController extends Controller
 {
@@ -19,7 +20,7 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'firstname' => 'required|',
+            'firstname' => 'required|max:10|',
             'lastname' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required',
@@ -36,38 +37,54 @@ class RegisterController extends Controller
             $user->role_id = $request->input('role');
             if ($user->save()) {
                 if ($user->role_id == 1) {
-                    $this->createStudent($user->id,);
+                    $student = new Student();
+                    $student->firstName = $request->input('firstname');
+                    $student->lastName = $request->input('lastname');
+                    $student->user_id = $user->id;
+                    $student->save();
+                } else {
+                    $teacher = new Teacher();
+                    $teacher->name = $request->input('firstname');
+                    $teacher->user_id = $user->id;
+                    $teacher->save();
                 }
             }
             return $this->authenticate($request);
         }
         return redirect('/registeration.create');
     }
-    public function createStudent()
-    {
-    }
-    public function createTeacher()
-    {
-    }
+    // public function createStudent()
+    // {
+    // }
+    // public function createTeacher()
+    // {
+    // }
     public function login(Request $request)
     {
         return view('registeration.login');
     }
     public function authenticate(Request $request)
     {
+        // dd($request);
         $student = Student::all();
-        $users = DB::table('users')->get();
+        // $users = DB::table('users')->get();
         $role = $request->role;
-        if ($role == 2) {
-            $credentials = [
-                'email' => $request['email'],
-                'password' => $request['password'],
-            ];
-            if (Auth::attempt($credentials)) {
+        $credentials = [
+            'email' => $request['email'],
+            'password' => $request['password'],
+        ];
+        if (Auth::attempt($credentials)) {
+            if ($role == 2) {
+                $credentials = [
+                    'email' => $request['email'],
+                    'password' => $request['password'],
+                ];
+                // if (Auth::attempt($credentials)) {
                 return view('teacher.home', compact('student'));
+                // }
             }
+            return view('student.dashboard');
         }
-        return view('student.dashboard');
     }
     public function loginConfirem(Request $request)
     {
@@ -77,7 +94,7 @@ class RegisterController extends Controller
                 'password' => 'required'
             ],
             [
-                'name.requird' => 'email is incorrect',
+                'email.requiredd' => 'email is incorrect',
                 'password.required' => 'Fill the Correct Password'
             ]
         );
@@ -87,9 +104,9 @@ class RegisterController extends Controller
         ];
         if (Auth::attempt($credentials)) {
             if (Auth::user()->role_id == 1) {
-                $firstname = Auth::user()->firstName;
-                $lastname = Auth::user()->lastName;
-                return  view('student.dashboard', ['firstname' => $firstname], ['lastname' => $lastname]);
+                // $user = Auth::user();
+                // dd($user);
+                return  view('student.dashboard');
             }
             $student = Student::all();
             return view('teacher.home', compact('student'));
@@ -98,6 +115,8 @@ class RegisterController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

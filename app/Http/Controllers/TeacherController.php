@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\asgnmentsub;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\CodeCoverage\Driver\Selector;
+use Illuminate\Testing\Constraints\SoftDeletedInDatabase;
 
 class TeacherController extends Controller
 {
@@ -56,7 +57,7 @@ class TeacherController extends Controller
 
     public function editAsg()
     {
-        $asgnment = DB::table('assignments')->get();
+        $asgnment = Assignment::all();
         return view('teacher.editAsg', compact('asgnment'));
     }
     public function edit($id)
@@ -95,7 +96,11 @@ class TeacherController extends Controller
     }
     public function destroy($id)
     {
-        DB::delete('delete from assignments where id =?', [$id]);
+        // dd($id);
+        // DB::delete('delete from assignments where id =?', [$id]);
+        // return redirect('editAsg');
+        $delete = Assignment::where('id', $id);
+        $delete->delete();
         return redirect('editAsg');
     }
     public function giveGrade(Request $request, $id)

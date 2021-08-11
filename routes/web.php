@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 //Registration
 Route::get('/create', [RegisterController::class, 'create']);
-Route::post('/register', [RegisterController::class, 'store'])->name('home');
+Route::post('/register', [RegisterController::class, 'store'])->name('student');
 Route::get('/login', [RegisterController::class, 'login']);
 Route::get('/home', function () {
     return view('/home');

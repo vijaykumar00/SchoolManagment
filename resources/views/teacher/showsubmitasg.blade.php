@@ -17,7 +17,7 @@
             <td>{{$submit->asgname}}</td>
             <td>{{$submit->firstname ." ".$submit->lastname}}</td>
             <td>{{$submit->class}}</td>
-            <td>{{$submit->document}}</td>
+            <td><embed src="{{ asset('uploads/Asgnments/'.$submit->document)}}" width="600" height="500" alt="pdf" /></td>
             <td>{{$submit->grades}}</td>
             <td><a href="/grade/{{$submit->id}}"><button class="btn btn-success">Give Grade</button></a></td>
         </tr>
